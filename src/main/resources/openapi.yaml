@@ -1,0 +1,36 @@
+openapi: 3.1.0
+info:
+  title: Reproducer - type array nullable bug
+  version: 1.0.0
+
+paths:
+  /kunde:
+    get:
+      operationId: getKunde
+      summary: Liefert einen Kunden zurück
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kunde'
+
+components:
+  schemas:
+    Kunde:
+      type: object
+      properties:
+        zahlungsverbindung:
+          type:
+            - "object"
+            - "null"
+          $ref: '#/components/schemas/Zahlungsverbindung'
+
+    Zahlungsverbindung:
+      type: object
+      properties:
+        iban:
+          type: string
+        bic:
+          type: string
